@@ -49,7 +49,9 @@ module.exports = class CommandManager {
                 parts,
                 command,
                 channel: message.channel,
-                author: message.author
+                author: message.author,
+                guild: message.guild,
+                member: message.guild.member(message.author)
             })
         }
     }

@@ -47,6 +47,9 @@ const startup = async () => {
     // Connect to Discord
     await bot.connect(config.token)
 
+    // Load middleware
+    await bot.autoexec(path.join(__dirname, 'middleware'), [bot])
+
     // Load command handlers
     await bot.autoexec(path.join(__dirname, 'commands'), [bot])
 
