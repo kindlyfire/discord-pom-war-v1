@@ -79,7 +79,7 @@ module.exports = (bot) => {
         let prev = targetProfile.pomCount
 
         let n = parseInt(args[0].replace('^', ''))
-        console.log(n)
+
         if (args[0] === 'reset') {
             targetProfile.pomCount = 0
         } else if (!isNaN(n)) {
