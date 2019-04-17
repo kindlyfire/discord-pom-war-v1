@@ -2,8 +2,6 @@
 //     !pom command
 //
 
-const Discord = require('discord.js')
-
 module.exports = (bot) => {
     const handler = async ({
         message,
@@ -14,10 +12,7 @@ module.exports = (bot) => {
         member
     }) => {
         if (args.length === 0) {
-            // Statistics message
-            return channel.send({
-                embed: await embeds.StatsEmbed()
-            })
+            args = ['+']
         }
 
         let action = args[0]
@@ -37,7 +32,9 @@ module.exports = (bot) => {
             let guildPomCount = profiles.reduce((p, c) => p + c.pomCount, 0)
 
             return channel.send(
-                `✅ ${g.name} now has ${guildPomCount} poms. You have tracked ${
+                `**+1!**  ✅  ${
+                    g.name
+                } now has ${guildPomCount} poms. You have tracked ${
                     profile.pomCount
                 } of those.`
             )
@@ -80,9 +77,21 @@ module.exports = (bot) => {
         }
 
         let prev = targetProfile.pomCount
-        let n = parseInt(args[0])
-        targetProfile.pomCount += isNaN(n) ? 0 : n
+
+        let n = parseInt(args[0].replace('^', ''))
+        console.log(n)
+        if (args[0] === 'reset') {
+            targetProfile.pomCount = 0
+        } else if (!isNaN(n)) {
+            if (args[0].charAt(0) === '^') {
+                targetProfile.pomCount = Math.abs(n)
+            } else {
+                targetProfile.pomCount += n
+            }
+        }
+
         await targetProfile.save()
+
         let tagParts = targetProfile.dataValues.tag.split('#')
 
         return channel.send(
@@ -93,43 +102,4 @@ module.exports = (bot) => {
     }
 
     bot.addCommand('pom', handler)
-}
-
-const embeds = {
-    DefaultEmbed() {
-        return new Discord.RichEmbed()
-            .setColor(0xbaed91)
-            .setTitle('🍅  PC-KOA Pomodoro Event  🍅')
-    },
-
-    async StatsEmbed() {
-        let guilds = CONFIG().guilds
-
-        let embed = this.DefaultEmbed().setDescription(
-            `Statistics for the current Pomodoro Event between ${guilds
-                .slice(0, -1)
-                .map((g) => g.name)
-                .join(', ')} and ${guilds[guilds.length - 1].name}:`
-        )
-
-        for (let guild of guilds) {
-            let profiles = await MODELS().Profile.findAll({
-                where: {
-                    guildId: guild.id
-                },
-                attributes: ['userId', 'pomCount']
-            })
-            let guildPomCount = profiles.reduce((p, c) => p + c.pomCount, 0)
-
-            embed.addField(
-                `${guild.slug} Pomodoros`,
-                `**${guildPomCount}** pomodoros by ${
-                    profiles.filter((p) => p.pomCount > 0).length
-                } members`,
-                true
-            )
-        }
-
-        return embed
-    }
 }
