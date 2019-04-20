@@ -32,11 +32,11 @@ module.exports = (bot) => {
             let guildPomCount = profiles.reduce((p, c) => p + c.pomCount, 0)
 
             return channel.send(
-                `**+1!**  ✅  ${
+                `${member}, **+1!**  ✅  ${
                     g.name
-                } now has ${guildPomCount} poms. You have tracked ${
+                } now has ${guildPomCount} poms. You've contributed ${
                     profile.pomCount
-                } of those.`
+                }.`
             )
         }
 
@@ -44,7 +44,9 @@ module.exports = (bot) => {
         if (
             g.managerRoleIds.filter((rId) => member.roles.has(rId)).length === 0
         ) {
-            return channel.send('❌ You may only use `!pom` and `!pom +`.')
+            return channel.send(
+                '❌ You may only add one pom at a time (`!pom`)'
+            )
         }
 
         if (message.mentions.members.size === 0) {

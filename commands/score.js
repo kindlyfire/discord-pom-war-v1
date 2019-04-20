@@ -3,7 +3,7 @@
 const Discord = require('discord.js')
 
 module.exports = (bot) => {
-    bot.addCommand('score', async ({ channel }) => {
+    bot.addCommand('warboard', async ({ channel }) => {
         return channel.send({
             embed: await embeds.StatsEmbed()
         })
@@ -14,7 +14,7 @@ const embeds = {
     DefaultEmbed() {
         return new Discord.RichEmbed()
             .setColor(0xff0000)
-            .setTitle('🍅  PC-KOA Pomodoro Event  🍅')
+            .setTitle('🍅  PC-KOA Pomodoro War  🍅')
     },
 
     async StatsEmbed() {
