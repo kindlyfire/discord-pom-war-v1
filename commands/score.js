@@ -32,7 +32,8 @@ const embeds = {
                 where: {
                     guildId: guild.id
                 },
-                attributes: ['userId', 'pomCount']
+                order: [['pomCount', 'DESC']],
+                attributes: ['pomCount', 'tag']
             })
             let guildPomCount = profiles.reduce((p, c) => p + c.pomCount, 0)
 
@@ -40,7 +41,19 @@ const embeds = {
                 `${guild.slug} Pomodoros`,
                 `**${guildPomCount}** pomodoros by ${
                     profiles.filter((p) => p.pomCount > 0).length
-                } members`,
+                } members.\n\nTop five pommers:\n${profiles
+                    .slice(0, 5)
+                    .map(
+                        (p, i) =>
+                            '`' +
+                            (i + 1) +
+                            '.`' +
+                            UTILS().formatTag(p.tag) +
+                            ' (' +
+                            p.pomCount +
+                            ')'
+                    )
+                    .join('\n')}`,
                 true
             )
         }

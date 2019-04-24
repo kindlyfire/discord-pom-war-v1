@@ -49,5 +49,11 @@ module.exports = {
 
     randomItem(arr) {
         return arr[Math.floor(Math.random() * arr.length)]
+    },
+
+    formatTag(tag) {
+        const parts = tag.split('#')
+
+        return `**${parts[0]}**#${parts[1]}`
     }
 }
