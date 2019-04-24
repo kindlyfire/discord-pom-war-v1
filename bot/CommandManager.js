@@ -17,7 +17,9 @@ module.exports = class CommandManager {
         if (
             message.author.bot ||
             !message.guild ||
-            message.guild.id !== CONFIG().serverId
+            !CONFIG().guilds.find((g) =>
+                g.allowedChannels.includes(message.channel.id)
+            )
         ) {
             return
         }
