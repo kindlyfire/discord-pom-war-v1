@@ -2,6 +2,8 @@
 //     !pom command
 //
 
+const Discord = require('discord.js')
+
 module.exports = (bot) => {
     const handler = async ({
         message,
@@ -42,6 +44,12 @@ module.exports = (bot) => {
 
         // Reserved section: add or remove multiple poms to other users
         if (
+            !member.hasPermission(
+                Discord.Permissions.FLAGS.ADMINISTRATOR,
+                false,
+                true,
+                true
+            ) &&
             g.managerRoleIds.filter((rId) => member.roles.has(rId)).length === 0
         ) {
             return channel.send(
