@@ -36,7 +36,7 @@ module.exports = async (bot) => {
             attributes: ['pomCount', 'tag']
         })
 
-        const pageNumber = args.length > 1 ? parseInt(args[0]) : 1
+        const pageNumber = args.length > 1 ? parseInt(args[1]) : 1
         const pageCount = Math.ceil(profiles.length / 10)
 
         if (isNaN(pageNumber) || pageNumber < 1 || pageNumber > pageCount) {
