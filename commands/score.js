@@ -36,12 +36,13 @@ const embeds = {
                 attributes: ['pomCount', 'tag']
             })
             let guildPomCount = profiles.reduce((p, c) => p + c.pomCount, 0)
+            let profileCount = profiles.filter((p) => p.pomCount > 0).length
 
             embed.addField(
                 `${guild.slug} Pomodoros`,
-                `**${guildPomCount}** pomodoros by ${
-                    profiles.filter((p) => p.pomCount > 0).length
-                } members.\n\nTop five pommers:\n${profiles
+                `**${guildPomCount}** pomodoros by ${profileCount} members.\nAverage of ~${Math.round(
+                    guildPomCount / profileCount
+                )} poms/member.\n\nTop five pommers:\n${profiles
                     .slice(0, 5)
                     .map(
                         (p, i) =>
