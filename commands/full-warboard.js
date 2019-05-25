@@ -6,7 +6,15 @@ module.exports = async (bot) => {
     const handler = async ({ guild, channel, member, args }) => {
         const g = CONFIG().guilds.find((g) => g.id === guild.id)
 
-        if (!g.managerRoleIds.some((rId) => member.roles.has(rId))) {
+        if (
+            !member.hasPermission(
+                Discord.Permissions.FLAGS.ADMINISTRATOR,
+                false,
+                true,
+                true
+            ) &&
+            !g.managerRoleIds.some((rId) => member.roles.has(rId))
+        ) {
             return
         }
 
