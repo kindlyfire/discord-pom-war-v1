@@ -35,7 +35,10 @@ const embeds = {
                 order: [['pomCount', 'DESC']],
                 attributes: ['pomCount', 'tag']
             })
-            let guildPomCount = profiles.reduce((p, c) => p + c.pomCount, 0)
+            let guildPomCount = profiles.reduce(
+                (p, c) => (c.pomCount > 3 ? p + c.pomCount : p),
+                0
+            )
             let profileCount = profiles.filter((p) => p.pomCount > 3).length
 
             embed.addField(
