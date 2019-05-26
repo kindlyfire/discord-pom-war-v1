@@ -31,7 +31,10 @@ module.exports = (bot) => {
                 },
                 attributes: ['userId', 'pomCount']
             })
-            let guildPomCount = profiles.reduce((p, c) => p + c.pomCount, 0)
+            let guildPomCount = profiles.reduce(
+                (p, c) => (c.pomCount > 3 ? p + c.pomCount : p),
+                0
+            )
 
             return channel.send(
                 `${member}, **+1!**  ✅  ${
