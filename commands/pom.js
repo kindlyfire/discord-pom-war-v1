@@ -32,7 +32,7 @@ module.exports = (bot) => {
                 attributes: ['userId', 'pomCount']
             })
             let guildPomCount = profiles.reduce(
-                (p, c) => (c.pomCount > 3 ? p + c.pomCount : p),
+                (p, c) => (c.pomCount > 2 ? p + c.pomCount : p),
                 0
             )
 

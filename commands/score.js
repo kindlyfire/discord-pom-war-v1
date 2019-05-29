@@ -36,10 +36,10 @@ const embeds = {
                 attributes: ['pomCount', 'tag']
             })
             let guildPomCount = profiles.reduce(
-                (p, c) => (c.pomCount > 3 ? p + c.pomCount : p),
+                (p, c) => (c.pomCount > 2 ? p + c.pomCount : p),
                 0
             )
-            let profileCount = profiles.filter((p) => p.pomCount > 3).length
+            let profileCount = profiles.filter((p) => p.pomCount > 2).length
 
             embed.addField(
                 `${guild.slug} Pomodoros`,
