@@ -12,7 +12,7 @@ Features:
 
 ## Installation
 
-This bot was created solely for [Knights of Academia](https://knightsofacademia.org/) and Potential Central. That said, the code is not locked in to their Discord servers and is fully configurable. Example configuration is available in `config_example.js`. The configuration file name will be named depending on the value of the `NODE_ENV` environment variable:
+This bot was created solely for [Knights of Academia](https://knightsofacademia.org/) and Potential Central. That said, the code is not locked in to their Discord servers and is fully configurable. Example configuration is available in `config_example.js`. The configuration file will be named depending on the value of the `NODE_ENV` environment variable:
 
 ```bash
 # Run using the configuration from `config_development.js`
