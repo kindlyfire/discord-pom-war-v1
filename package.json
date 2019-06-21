@@ -1,5 +1,5 @@
 {
-    "name": "pom-event-bot",
+    "name": "pom-event-bot-v1",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -7,7 +7,7 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Tijl Van den Brugghen <me@tijlvdb.me> (https://tijlvdb.me)",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "private": true,
     "dependencies": {
         "bunyan": "^1.8.12",
